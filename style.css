@@ -1,0 +1,314 @@
+/* ============================================================
+   "I Will Be Attending" — tooling UI styles (not the template's
+   own aesthetic). Clean, minimal, desktop-first, mobile-stacked.
+   ============================================================ */
+
+:root {
+  --navy: #0a1f44;
+  --navy-soft: #1d3a6b;
+  --bg: #f2f4f8;
+  --card: #ffffff;
+  --border: #dde3ec;
+  --text: #1c2430;
+  --text-dim: #5b6572;
+  --accent: var(--navy);
+  --danger: #b3261e;
+  --radius: 12px;
+  --shadow: 0 1px 3px rgba(10, 31, 68, 0.08), 0 4px 14px rgba(10, 31, 68, 0.06);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.45;
+}
+
+/* ---------- Header ---------- */
+
+.app-header {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 28px 20px 8px;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  color: var(--navy);
+  letter-spacing: 0.01em;
+}
+
+.app-subtitle {
+  margin: 4px 0 0;
+  color: var(--text-dim);
+  font-size: 0.95rem;
+}
+
+/* ---------- Layout ---------- */
+
+.layout {
+  max-width: 1080px;
+  margin: 16px auto 48px;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.panel {
+  min-width: 0;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px;
+  margin-bottom: 18px;
+}
+
+.card h2 {
+  margin: 0 0 12px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+/* ---------- Dropzone ---------- */
+
+.dropzone {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 18px 14px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+  user-select: none;
+}
+
+.dropzone:hover,
+.dropzone:focus-within,
+.dropzone.dragover {
+  border-color: var(--accent);
+  background: rgba(10, 31, 68, 0.04);
+}
+
+.dropzone-icon {
+  font-size: 1.6rem;
+  color: var(--accent);
+}
+
+.dropzone-text {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+
+.dropzone-text strong {
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+/* ---------- Inputs & buttons ---------- */
+
+.field-label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+
+.text-input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.text-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(10, 31, 68, 0.12);
+}
+
+.btn {
+  appearance: none;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+
+.btn-primary {
+  width: 100%;
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--navy-soft);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--navy);
+  border-color: var(--border);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: rgba(10, 31, 68, 0.06);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ---------- Messages ---------- */
+
+.msg {
+  margin: 10px 0 0;
+  font-size: 0.85rem;
+}
+
+.msg-error {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.msg-hint {
+  color: var(--text-dim);
+}
+
+/* ---------- Preview ---------- */
+
+.preview-panel {
+  position: sticky;
+  top: 16px;
+}
+
+#previewCanvas {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.preview-caption {
+  margin: 8px auto 0;
+  max-width: 500px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+/* ---------- Crop modal ---------- */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(12, 18, 28, 0.62);
+  backdrop-filter: blur(2px);
+}
+
+.modal-overlay[hidden] {
+  display: none;
+}
+
+.modal {
+  width: 100%;
+  max-width: 560px;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+}
+
+.modal-title {
+  margin: 0 0 4px;
+  font-size: 1.15rem;
+  color: var(--navy);
+}
+
+.modal-sub {
+  margin: 0 0 14px;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.crop-container {
+  height: min(58vh, 460px);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #111;
+}
+
+.crop-container img {
+  display: block;
+  max-width: 100%;
+}
+
+.modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.modal-actions .btn-primary {
+  width: auto;
+}
+
+.modal-actions .spacer {
+  flex: 1;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 820px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .preview-panel {
+    position: static;
+    order: -1; /* show preview first on small screens */
+  }
+}

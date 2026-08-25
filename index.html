@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>I Will Be Attending — Photo Template Generator</title>
+  <link rel="stylesheet" href="vendor/cropper.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>I Will Be Attending</h1>
+    <p class="app-subtitle">Upload your photo, crop it, type your name, and download your attendance card.</p>
+  </header>
+
+  <main class="layout">
+    <!-- Controls -->
+    <section class="panel controls" aria-label="Controls">
+
+      <div class="card">
+        <h2>1. Your photo</h2>
+
+        <label class="dropzone" id="dropzone"
+               for="photoInput"
+               aria-label="Upload your photo (JPG, PNG or WebP)">
+          <input type="file" id="photoInput"
+                 accept="image/jpeg,image/png,image/webp" hidden />
+          <span class="dropzone-icon" aria-hidden="true">&#8679;</span>
+          <span class="dropzone-text"><strong>Upload your photo</strong><br />click or drop a JPG / PNG / WebP here</span>
+        </label>
+
+        <div class="row">
+          <button type="button" id="recropBtn" class="btn btn-secondary" hidden>Re-crop photo</button>
+          <button type="button" id="replaceBtn" class="btn btn-secondary" hidden>Replace photo</button>
+        </div>
+
+        <p id="fileError" class="msg msg-error" hidden></p>
+      </div>
+
+      <div class="card">
+        <h2>2. Your name</h2>
+        <label for="nameInput" class="field-label">Full name (as it should appear)</label>
+        <input type="text" id="nameInput" class="text-input"
+               placeholder="e.g. Ada Lovelace"
+               autocomplete="name" maxlength="80" />
+      </div>
+
+      <div class="card">
+        <h2>3. Download</h2>
+        <button type="button" id="downloadBtn" class="btn btn-primary" disabled>Download PNG</button>
+        <p id="downloadHint" class="msg msg-hint">
+          Upload a photo and enter your name to enable the download.
+        </p>
+        <p class="msg msg-hint">Exports at full 2160 &times; 2160&nbsp;px resolution.</p>
+      </div>
+
+    </section>
+
+    <!-- Live preview -->
+    <section class="panel preview-panel" aria-label="Live preview">
+      <canvas id="previewCanvas" width="2160" height="2160"></canvas>
+      <p class="preview-caption">Live preview (rendered at full resolution, scaled for display)</p>
+    </section>
+  </main>
+
+  <!-- Crop modal -->
+  <div class="modal-overlay" id="cropModal" role="dialog" aria-modal="true"
+       aria-labelledby="cropModalTitle" hidden>
+    <div class="modal">
+      <h2 id="cropModalTitle" class="modal-title">Position &amp; crop your photo</h2>
+      <p class="modal-sub">Drag to reposition &middot; scroll / pinch to zoom &middot; square crop is locked.</p>
+      <div class="crop-container">
+        <img id="cropImage" alt="Photo to crop" />
+      </div>
+      <div class="modal-actions">
+        <button type="button" id="zoomInBtn" class="btn btn-secondary" title="Zoom in">+</button>
+        <button type="button" id="zoomOutBtn" class="btn btn-secondary" title="Zoom out">&minus;</button>
+        <span class="spacer"></span>
+        <button type="button" id="cancelCropBtn" class="btn btn-secondary">Cancel</button>
+        <button type="button" id="confirmCropBtn" class="btn btn-primary">Confirm crop</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="vendor/cropper.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
